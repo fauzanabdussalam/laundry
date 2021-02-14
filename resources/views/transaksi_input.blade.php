@@ -198,6 +198,8 @@
             success: function(result)
             {
                 $("#list_layanan").text('');
+                $('#is_layanan_terisi').val('0');
+
                 $.each(result.cart,function(key,value)
                 {
                     row =   '<tr>' +
@@ -209,7 +211,7 @@
                             '</tr>';
 
                     $("#list_layanan").append(row);
-                    $('#is_layanan_terisi').val('1')
+                    $('#is_layanan_terisi').val('1');
                 });
 
                 $("#total_bayar").text(result.total);
