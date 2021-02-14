@@ -16,6 +16,7 @@ class Transaksi extends Model
         'Kd_Cabang', 
         'Id_Pelanggan', 
         'Kd_Layanan',
+        'List_Layanan',
         'Jumlah_Barang',
         'Total_Bayar',
         'Kd_Pengharum',

@@ -18,8 +18,7 @@ class DatabaseSeeder extends Seeder
             PelangganSeeder::class,
             PegawaiSeeder::class,
             PengharumSeeder::class,
-            LayananSeeder::class,
-            TransaksiSeeder::class
+            LayananSeeder::class
         ]);
     }
 }

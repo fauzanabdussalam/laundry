@@ -2,8 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
-
-
+use App\Http\Controllers\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,9 +61,18 @@ Route::group(['prefix' => 'pelanggan'], function ()
 Route::group(['prefix' => 'transaksi'], function () 
 {
     Route::get('/', [AdminController::class, 'transaksi'])->name('transaksi');
+    Route::get('input', [AdminController::class, 'inputTransaksi'])->name('transaksi.input');
     Route::post('save', [AdminController::class, 'saveTransaksi'])->name('transaksi.save');
     Route::post('detail', [AdminController::class, 'transaksiDetail'])->name('transaksi.detail');
     Route::post('delete', [AdminController::class, 'hapusTransaksi'])->name('transaksi.delete');
+});
+
+Route::group(['prefix' => 'cart'], function () 
+{
+    Route::post('/', [CartController::class, 'cart'])->name('cart');
+    Route::post('clear', [CartController::class, 'clear'])->name('cart.clear');
+    Route::post('add', [CartController::class, 'add'])->name('cart.add');
+    Route::post('remove', [CartController::class, 'remove'])->name('cart.remove');
 });
 
 require __DIR__.'/auth.php';

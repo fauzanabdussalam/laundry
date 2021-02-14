@@ -17,7 +17,8 @@ class CreateTransaksiTable extends Migration
             $table->string('Nomor_Transaksi', 20);
             $table->string('Kd_Cabang', 20);
             $table->unsignedBigInteger('Id_Pelanggan');
-            $table->string('Kd_Layanan', 20);
+            $table->string('Kd_Layanan', 20)->nullable();
+            $table->text('List_Layanan');
             $table->float('Jumlah_Barang');
             $table->double('Total_Bayar');
             $table->string('Kd_Pengharum', 20);

@@ -60,7 +60,7 @@
                 <h4 class="modal-title">Cabang</h4> 
             </div> 
             
-            <form action="{{ Route('cabang.save') }}" method="post" onsubmit="return checkDuplicateCode();"  enctype="multipart/form-data">
+            <form action="{{ Route('cabang.save') }}" method="post" onsubmit="return checkDuplicateCode();" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <input type="hidden" id="kode_old" name="kode_old"> 
                            

@@ -158,11 +158,7 @@
             <!-- Left Sidebar End -->
 
             @yield('content')
-
-                <footer class="footer primary text-center">
-                    {{-- <marquee><b>Copyright © 2021</b></marquee> --}}
-                </footer>
-
+            
             </div>
         </div>
         <!-- END wrapper -->

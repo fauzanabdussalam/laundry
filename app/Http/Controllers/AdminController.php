@@ -62,7 +62,7 @@ class AdminController extends Controller
     {
         $classCabang = new Cabang();
 
-        $data = $classCabang->getDetailData($request->kode)->delete();;
+        $data = $classCabang->getDetailData($request->kode)->delete();
 
         return response()->json($data);
     }
@@ -107,7 +107,7 @@ class AdminController extends Controller
     {
         $classLayanan = new Layanan();
 
-        $data = $classLayanan->getDetailData($request->kode)->delete();;
+        $data = $classLayanan->getDetailData($request->kode)->delete();
 
         return response()->json($data);
     }
@@ -151,7 +151,7 @@ class AdminController extends Controller
     {
         $classPengharum = new Pengharum();
 
-        $data = $classPengharum->getDetailData($request->kode)->delete();;
+        $data = $classPengharum->getDetailData($request->kode)->delete();
 
         return response()->json($data);
     }
@@ -198,7 +198,7 @@ class AdminController extends Controller
     {
         $classPegawai = new Pegawai();
 
-        $data = $classPegawai->getDetailData($request->id)->delete();;
+        $data = $classPegawai->getDetailData($request->id)->delete();
 
         return response()->json($data);
     }
@@ -234,25 +234,33 @@ class AdminController extends Controller
     function transaksi(Request $request)
     {
         $classTransaksi     = new Transaksi();
-        $classCabang        = new Cabang();
-        $classLayanan       = new Layanan();
-        $classPengharum     = new Pengharum();
 
         $tgl_awal   = ($request->tgl_awal!='')?$request->tgl_awal:date('Y-m-d');
         $tgl_akhir  = ($request->tgl_akhir!='')?$request->tgl_akhir:date('Y-m-d');
 
         $transaksi      = $classTransaksi->getListData($tgl_awal, $tgl_akhir)->get();
+      
+        return view('transaksi', [
+            'transaksi' => $transaksi,
+            'tgl_awal'  => $tgl_awal,
+            'tgl_akhir' => $tgl_akhir
+        ]);
+    }
+
+    function inputTransaksi(Request $request)
+    {
+        $classCabang        = new Cabang();
+        $classLayanan       = new Layanan();
+        $classPengharum     = new Pengharum();
+
         $cabang         = $classCabang->getListData()->get();
         $layanan        = $classLayanan->getListData()->get();
         $pengharum      = $classPengharum->getListData()->get();
       
-        return view('transaksi', [
-            'transaksi' => $transaksi,
+        return view('transaksi_input', [
             'cabang'    => $cabang,
             'layanan'   => $layanan,
-            'pengharum' => $pengharum,
-            'tgl_awal'  => $tgl_awal,
-            'tgl_akhir' => $tgl_akhir
+            'pengharum' => $pengharum
         ]);
     }
 
@@ -280,6 +288,20 @@ class AdminController extends Controller
             $id_pelanggan = $request->id_pelanggan;
         }
 
+        $cart = \Cart::getContent();
+
+        $list_layanan = array();
+        foreach($cart as $data)
+        {
+            $list_layanan[] = array(
+                "kode_layanan"  => $data->id,
+                "nama_layanan"  => $data->name,
+                "tarif"         => $data->quantity,
+                "jumlah_barang" => $data->price,
+                "total"         => \Cart::get($data->id)->getPriceSum()
+            );
+        }
+
         $data = array(
             'Nomor_Transaksi'           => $nomor_transaksi,
             'Id_Pelanggan'              => $id_pelanggan,
@@ -287,9 +309,10 @@ class AdminController extends Controller
             'Id_Pegawai'                => $request->pegawai,
             'Tanggal_Transaksi_Masuk'   => date('Y-m-d'),
             'Tanggal_Transaksi_Selesai' => $request->tanggal_selesai,
-            'Kd_Layanan'                => $request->layanan,
-            'Jumlah_Barang'             => $request->jumlah_barang,
-            'Total_Bayar'               => $request->total_bayar,
+            'Kd_Layanan'                => NULL,
+            'Jumlah_Barang'             => '0',
+            'List_Layanan'              => json_encode($list_layanan),
+            'Total_Bayar'               => \Cart::getTotal(),
             'Kd_Pengharum'              => $request->pengharum
         );
 
@@ -313,7 +336,7 @@ class AdminController extends Controller
     {
         $classTransaksi = new Transaksi();
 
-        $data = $classTransaksi->getDetailData($request->kode)->delete();;
+        $data = $classTransaksi->getDetailData($request->kode)->delete();
 
         return response()->json($data);
     }
