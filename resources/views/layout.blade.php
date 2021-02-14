@@ -71,7 +71,7 @@
                 <!-- LOGO -->
                 <div class="topbar-left">
                     <div class="text-center">
-                        {{-- <a href="{{url('admin')}}" class="logo"><span><img src="{{URL::asset('assets')}}/logo_abd2.png" style="height: 55px; width: 130px;"> </span></a> --}}
+                        <a href="#" class="logo"><span>Laundry</span></a>
                     </div>
                 </div>
                 <!-- Button mobile view to collapse sidebar menu -->
@@ -81,22 +81,6 @@
                             <div class="pull-left">
                                 <span class="clearfix"></span>
                             </div>
-
-                            <ul class="nav navbar-nav navbar-right pull-right">
-                                <li class="dropdown">
-                                    <a href="" class="dropdown-toggle profile" data-toggle="dropdown" aria-expanded="true"><img src="{{URL::asset('images/users/default.png')}}" alt="user-img" class="img-circle"> </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#" data-toggle="modal" data-target="#ubah-pw"><i class="fa fa-lock"></i> Ubah Password</a></li>
-                                        <li><a href="{{ route('admin.logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                                            <i class="fa fa-sign-out"></i> Logout
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form></li>
-                                    </ul>
-                                </li>
-                            </ul>
                         </div>
                         <!--/.nav-collapse -->
                     </div>
