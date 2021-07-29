@@ -19,7 +19,7 @@
           hoverColor: false,
           markerStyle: {
             initial: {
-              fill: '#317eeb',
+              fill: '#33b86c',
               stroke: '#ea6c9c'
             }
           },
